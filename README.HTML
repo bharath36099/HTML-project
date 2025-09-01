@@ -1,0 +1,91 @@
+class Car:
+    def __init__(self, car_id, make, model, year, price):
+        self.car_id = car_id
+        self.make = make
+        self.model = model
+        self.year = year
+        self.price = price
+
+    def display(self):
+        print(f"ID: {self.car_id}, {self.year} {self.make} {self.model} - ${self.price}")
+
+
+class CarShowroom:
+    def __init__(self):
+        self.cars = []
+        self.sold_cars = []
+
+    def add_car(self, car):
+        self.cars.append(car)
+        print("✅ Car added to showroom.")
+
+    def display_cars(self):
+        if not self.cars:
+            print("🚫 No cars available in the showroom.")
+            return
+        print("🚗 Available Cars:")
+        for car in self.cars:
+            car.display()
+
+    def sell_car(self, car_id):
+        for car in self.cars:
+            if car.car_id == car_id:
+                self.cars.remove(car)
+                self.sold_cars.append(car)
+                print(f"💰 Car ID {car_id} sold.")
+                return
+        print("❌ Car not found.")
+
+    def view_sales(self):
+        if not self.sold_cars:
+            print("📭 No sales yet.")
+            return
+        print("📋 Sold Cars:")
+        for car in self.sold_cars:
+            car.display()
+
+
+# Main Menu
+def main():
+    showroom = CarShowroom()
+
+    while True:
+        print("\n===== Car Showroom Menu =====")
+        print("1. Add Car")
+        print("2. Display Cars")
+        print("3. Sell Car")
+        print("4. View Sales")
+        print("5. Exit")
+
+        choice = input("Enter your choice: ")
+
+        if choice == '1':
+            car_id = input("Enter Car ID: ")
+            make = input("Enter Make: ")
+            model = input("Enter Model: ")
+            year = input("Enter Year: ")
+            price = float(input("Enter Price: "))
+            car = Car(car_id, make, model, year, price)
+            showroom.add_car(car)
+
+        elif choice == '2':
+            showroom.display_cars()
+
+        elif choice == '3':
+            car_id = input("Enter Car ID to sell: ")
+            showroom.sell_car(car_id)
+
+        elif choice == '4':
+            showroom.view_sales()
+
+        elif choice == '5':
+            print("👋 Exiting showroom system. Goodbye!")
+            break
+
+        else:
+            print("❌ Invalid choice. Please try again.")
+
+
+if __name__ == "__main__":
+    main()
+"# HTML-project" 
